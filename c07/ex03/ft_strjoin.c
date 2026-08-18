@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jelau <jelau@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/18 14:37:49 by jelau             #+#    #+#             */
-/*   Updated: 2026/08/18 15:43:59 by jelau            ###   ########.fr       */
+/*   Created: 2026/08/18 16:12:14 by jelau             #+#    #+#             */
+/*   Updated: 2026/08/18 16:12:16 by jelau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,35 +24,49 @@ int	ft_strlen(char *str)
 	return (num);
 }
 
-char    *ft_strcpy(char *dest, char *src)
+char	*ft_strcpy(char *dest, char *src)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (src[i] != '\0')
-    {
-        dest[i] = src[i];
-        i++;
-    }
-    dest[i] = '\0';
-    return (dest);
+	i = 0;
+	while (src[i] != '\0')
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
+
+char	*empty(void)
+{
+	char	*result;
+
+	result = malloc(sizeof(char) * 1);
+	if (!result)
+		return (NULL);
+	result[0] = '\0';
+	return (result);
+}
+
+int	copy(char *dest, char *src)
+{
+	ft_strcpy(dest, src);
+	return (ft_strlen(src));
 }
 
 char	*ft_strjoin(int size, char **strs, char *sep)
 {
 	int		i;
-	int		j;
 	int		n;
 	char	*result;
 
+	if (size == 0)
+		return (empty());
+	n = ft_strlen(sep) * (size - 1);
 	i = 0;
-	n = 0;
 	while (i < size)
-	{
-		n += ft_strlen(strs[i]);
-		i++;
-	}
-	n += ft_strlen(sep) * (size - 1);
+		n += ft_strlen(strs[i++]);
 	result = malloc(sizeof(char) * (n + 1));
 	if (!result)
 		return (NULL);
@@ -60,23 +74,13 @@ char	*ft_strjoin(int size, char **strs, char *sep)
 	n = 0;
 	while (i < size)
 	{
-		j = 0;
-		while (strs[i][j] != '\0')
+		n += copy(result + n, strs[i]);
+		if (i < size - 1)
 		{
-			result[n] = strs[i][j];
-			j++;
-			n++;
-		}
-		j = 0;
-		while (1 < size - 1 && sep[j] != '\0')
-		{
-			result[n] = sep[j];
-			j++;
-			n++;
+			n += copy(result + n, sep);
 		}
 		i++;
 	}
-	result[n] = '\0';
 	return (result);
 }
 
@@ -85,10 +89,10 @@ char	*ft_strjoin(int size, char **strs, char *sep)
 
 int main()
 {
-    int size = 3;
-    char *strs[] = {"aaa", "bbb", "ccc"};
+    int size = 0;
+    char *strs[] = {""};
     char *sep = "00";
-    char *result = ft_strjoin(3, strs, sep);
+    char *result = ft_strjoin(size, strs, sep);
     printf("%s", result);
     free(result);
     return (0);
