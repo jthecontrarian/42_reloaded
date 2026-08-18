@@ -1,0 +1,5 @@
+*.out
+*.swp
+ft_boolean.c
+ft_point.c
+ft_stock_str.h
