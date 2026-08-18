@@ -6,7 +6,7 @@
 /*   By: jelau <jelau@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/18 16:12:14 by jelau             #+#    #+#             */
-/*   Updated: 2026/08/18 22:38:20 by jelau            ###   ########.fr       */
+/*   Updated: 2026/08/18 22:43:44 by jelau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ char	*ft_strjoin(int size, char **strs, char *sep)
 	return (result);
 }
 
+/*
 #include <stdio.h>
 
 int main()
@@ -96,3 +97,4 @@ int main()
     free(result);
     return (0);
 }
+*/
