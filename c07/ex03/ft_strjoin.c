@@ -6,7 +6,7 @@
 /*   By: jelau <jelau@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/18 16:12:14 by jelau             #+#    #+#             */
-/*   Updated: 2026/08/18 16:12:16 by jelau            ###   ########.fr       */
+/*   Updated: 2026/08/18 22:38:20 by jelau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,17 +84,15 @@ char	*ft_strjoin(int size, char **strs, char *sep)
 	return (result);
 }
 
-/*
 #include <stdio.h>
 
 int main()
 {
     int size = 0;
-    char *strs[] = {""};
-    char *sep = "00";
+    char *strs[] = {"aaa","bbb","ccc"};
+    char *sep = "";
     char *result = ft_strjoin(size, strs, sep);
     printf("%s", result);
     free(result);
     return (0);
 }
-*/
