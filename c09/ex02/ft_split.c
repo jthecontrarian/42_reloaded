@@ -28,6 +28,7 @@ suppose
 */
 
 #include <stdlib.h>
+#include <stdio.h> ///////////
 
 char	*ft_strdup(char *src)
 {
@@ -62,28 +63,36 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-char **ft_split(char *str, char *charset);
+char **ft_split(char *str, char *charset)
 {
-	int		i;
-	int		len;
-	char	*array[];
+	int	i;
+	int	j;
+	int	len;
+	char	**array;
 
 	i = 0;
 	len = 0;
 	while (str[i] != '\0')
-	{
-		if (str[i] not in charset) //////////////////// 
-		len++;
+	{	
+		j = 0;
+		while (charset[j] != '\0' && str[i] != charset[j])
+		{
+			j++;
+			len++;
+		}
+		i++;
 	}
-
-	array = malloc(sizeof(char) * (len + 1));
-
-	i = 0;
-	while (i < len)
-	{
-		// insert the things you want
-		// have to loop through each "substring"
-	}
+	array = malloc(sizeof(char) * (len + 1)); //GOOD TILL HERE BOI!
+	
+	printf("%d\n", len + 1);
+	
+	//i = 0;
+	//while (i < len)
+	//{
+	//	array[]
+	//	// insert the things you want
+	//	// have to loop through each "substring"
+	//}
 	//array[i] = NULL; //last element
 	return (array);
 }
@@ -92,15 +101,16 @@ char **ft_split(char *str, char *charset);
 
 int	main(void)
 {
-	char **result = ft_split("aaa0bbb0ccc","01");
-	printf("{%s,%s,%s}", result[0], result[1], result[2], result[3]); // {aaa, bbb, ccc, NULL}
-	char **result = ft_split("aaa0bbb1ccc","01");
-	printf("{%s,%s,%s}", result[0], result[1], result[2], result[3]); // {aaa, bbb, ccc, NULL}
-	char **result = ft_split("aaa00bbb0ccc","0");
-	printf("{%s,%s,%s}", result[0], result[1], result[2], result[3]); // {aaa, bbb, ccc, NULL}
-	char **result = ft_split("aaa0bbb0ccc0","0");
-	printf("{%s,%s,%s}", result[0], result[1], result[2], result[3]); // {aaa, bbb, ccc, NULL}
-	char **result = ft_split("0aaa0bbb0ccc","0");
-	printf("{%s,%s,%s}", result[0], result[1], result[2], result[3]); // {aaa, bbb, ccc, NULL}
+	char **result;
+	result = ft_split("aaa0bbb0ccc","01");
+	//printf("{%s,%s,%s}", result[0], result[1], result[2], result[3]); // {aaa, bbb, ccc, NULL}
+	//char **result = ft_split("aaa0bbb1ccc","01");
+	//printf("{%s,%s,%s}", result[0], result[1], result[2], result[3]); // {aaa, bbb, ccc, NULL}
+	//char **result = ft_split("aaa00bbb0ccc","0");
+	//printf("{%s,%s,%s}", result[0], result[1], result[2], result[3]); // {aaa, bbb, ccc, NULL}
+	//char **result = ft_split("aaa0bbb0ccc0","0");
+	//printf("{%s,%s,%s}", result[0], result[1], result[2], result[3]); // {aaa, bbb, ccc, NULL}
+	//char **result = ft_split("0aaa0bbb0ccc","0");
+	//printf("{%s,%s,%s}", result[0], result[1], result[2], result[3]); // {aaa, bbb, ccc, NULL}
 	return (0);
 }
