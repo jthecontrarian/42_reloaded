@@ -19,9 +19,9 @@
 	Return:
 		Return 1 if c is inside charset, otherwise 0.
 */
-int is_separator(char c, char *charset)
+int	is_separator(char c, char *charset)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (charset[i] != '\0')
@@ -43,22 +43,22 @@ int is_separator(char c, char *charset)
 	Example: 
 		if *str="aaa0bbb0ccc", *charset="01", then return 3.
 */
-int count_substrings(char *str, char *charset)
+int	count_substrings(char *str, char *charset)
 {
-	int i;
-	int len;
-	int pos;
+	int	i;
+	int	len;
+	int	pos;
 
 	i = 0;
 	len = 0;
 	pos = 0;
-	while(str[i] != '\0')
+	while (str[i] != '\0')
 	{
 		if (is_separator(str[i], charset))
 		{
 			if (i != pos)
 				len++;
-			pos = i + 1; 
+			pos = i + 1;
 		}
 		i++;
 	}
@@ -69,16 +69,18 @@ int count_substrings(char *str, char *charset)
 
 /*
 	Description: 
-		return a malloc'ed substring given a string, the starting and ending index (exclusive of the ending index)
+		return a malloc'ed substring given a string, the starting and 
+		ending index (exclusive of the ending index)
 
 	Example:
-		suppose str = "aaabbbccc", start_i=3,end_i=5, it returns "bb" (not inclusive of the end_i element)
+		suppose str = "aaabbbccc", start_i=3,end_i=5, it returns "bb" 
+		(not inclusive of the end_i element)
 */
-char *get_substring(char *str, int start_i, int end_i)
+char	*get_substring(char *str, int start_i, int end_i)
 {
-	char *result;
-	int i;
-	int j;
+	char	*result;
+	int		i;
+	int		j;
 
 	result = malloc(sizeof(char) * ((end_i - start_i) + 1));
 	if (!result)
@@ -98,35 +100,33 @@ char *get_substring(char *str, int start_i, int end_i)
 /*
 	for the main loop, it consist of three parts
 	first while loop and if condition: to deal with separators at the front.
-	middle while loop, to determine the length of substring
-	then saves the substring into array using get_substring()
+	middle while loop: to determine the length of substring
 */
-char **ft_split(char *str, char *charset)
-{	
-	char **array;
-	int i;
-	int j;
-	int old_i;
+char	**ft_split(char *str, char *charset)
+{
+	char	**array;
+	int		i;
+	int		j;
+	int		old_i;
 
 	array = malloc(sizeof(char *) * (count_substrings(str, charset) + 1));
 	if (!array)
 		return (NULL);
 	i = 0;
 	j = 0;
-	while(str[i] != '\0')
+	while (str[i] != '\0')
 	{
-		while(str[i] != '\0' && is_separator(str[i], charset))
+		while (str[i] != '\0' && is_separator(str[i], charset))
 			i++;
 		if (str[i] == '\0')
-			break;
+			break ;
 		old_i = i;
-		while(str[i] != '\0' && !is_separator(str[i], charset))
+		while (str[i] != '\0' && !is_separator(str[i], charset))
 			i++;
-		array[j] = get_substring(str, old_i, i);
+		array[j++] = get_substring(str, old_i, i);
 		if (!array[j])
 			return (NULL);
-		j++;
-	}	
+	}
 	array[j] = NULL;
 	return (array);
 }
@@ -158,16 +158,16 @@ int	main(void)
 	
 	printf("\nft_split() test\n");
 	char **result;
-	result = ft_split("aaa0bbb1ccc","01");
-	printf("{%s,%s,%s,%s}\n", result[0], result[1], result[2], result[3]); // {aaa, bbb, ccc, NULL}
-	result = ft_split("aaa0bbb1ccc","01");
-	printf("{%s,%s,%s,%s}\n", result[0], result[1], result[2], result[3]); // {aaa, bbb, ccc, NULL}
-	result = ft_split("aaa00bbb0ccc","0");
-	printf("{%s,%s,%s,%s}\n", result[0], result[1], result[2], result[3]); // {aaa, bbb, ccc, NULL}
-	result = ft_split("aaa0bbb0ccc0","0");
-	printf("{%s,%s,%s,%s}\n", result[0], result[1], result[2], result[3]); // {aaa, bbb, ccc, NULL}
-	result = ft_split("0aaa0bbb0ccc","0");
-	printf("{%s,%s,%s,%s}\n", result[0], result[1], result[2], result[3]); // {aaa, bbb, ccc, NULL}
+	result = ft_split("aaa0bbb1ccc","01");  // {aaa, bbb, ccc, NULL}
+	printf("{%s,%s,%s,%s}\n", result[0], result[1], result[2], result[3]);
+	result = ft_split("aaa0bbb1ccc","01"); // {aaa, bbb, ccc, NULL}
+	printf("{%s,%s,%s,%s}\n", result[0], result[1], result[2], result[3]); 
+	result = ft_split("aaa00bbb0ccc","0"); // {aaa, bbb, ccc, NULL}
+	printf("{%s,%s,%s,%s}\n", result[0], result[1], result[2], result[3]); 
+	result = ft_split("aaa0bbb0ccc0","0"); // {aaa, bbb, ccc, NULL}
+	printf("{%s,%s,%s,%s}\n", result[0], result[1], result[2], result[3]); 
+	result = ft_split("0aaa0bbb0ccc","0"); // {aaa, bbb, ccc, NULL}
+	printf("{%s,%s,%s,%s}\n", result[0], result[1], result[2], result[3]);
 	result = ft_split("00","0");
 	printf("{%s}\n", result[0]); // {NULL}
 		result = ft_split("010","01");
