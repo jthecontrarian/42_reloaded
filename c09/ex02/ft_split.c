@@ -79,20 +79,17 @@ char	*get_substring(char *str, int start_i, int end_i)
 {
 	char	*result;
 	int		i;
-	int		j;
 
 	result = malloc(sizeof(char) * ((end_i - start_i) + 1));
 	if (!result)
 		return (NULL);
-	j = 0;
 	i = 0;
-	while (j < end_i - start_i)
+	while (i < end_i - start_i)
 	{
-		result[j] = str[start_i + i];
-		j++;
+		result[i] = str[start_i + i];
 		i++;
 	}
-	result[j] = '\0';
+	result[i] = '\0';
 	return (result);
 }
 
