@@ -43,30 +43,51 @@ int	is_separator(char c, char *charset)
 	Example: 
 		if *str="aaa0bbb0ccc", *charset="01", then return 3.
 */
+// int	count_substrings(char *str, char *charset)
+// {
+// 	int	i;
+// 	int	len;
+// 	int	pos;
+
+// 	i = 0;
+// 	len = 0;
+// 	pos = 0;
+// 	while (str[i] != '\0')
+// 	{
+// 		if (is_separator(str[i], charset))
+// 		{
+// 			if (i != pos)
+// 				len++;
+// 			pos = i + 1;
+// 		}
+// 		i++;
+// 	}
+// 	if (i != pos)
+// 		len++;
+// 	return (len);
+// }
 int	count_substrings(char *str, char *charset)
 {
-	int	i;
-	int	len;
-	int	pos;
+	int i;
+	int count;
+	int inside_word;
 
 	i = 0;
-	len = 0;
-	pos = 0;
-	while (str[i] != '\0')
+	count = 0;
+	inside_word = 0;
+	while(str[i] != '\0')
 	{
 		if (is_separator(str[i], charset))
+			inside_word = 0;
+		else if (inside_word == 0)
 		{
-			if (i != pos)
-				len++;
-			pos = i + 1;
+			count++;
+			inside_word = 1;
 		}
 		i++;
 	}
-	if (i != pos)
-		len++;
-	return (len);
+	return (count);
 }
-
 /*
 	Description: 
 		return a malloc'ed substring given a string, the starting and 
