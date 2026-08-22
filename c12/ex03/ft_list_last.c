@@ -1,47 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_list_push_front.c                               :+:      :+:    :+:   */
+/*   ft_list_last.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jelau <jelau@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/22 13:44:58 by jelau             #+#    #+#             */
-/*   Updated: 2026/08/22 13:44:59 by jelau            ###   ########.fr       */
+/*   Created: 2026/08/22 21:35:38 by jelau             #+#    #+#             */
+/*   Updated: 2026/08/22 21:35:39 by jelau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "ft_list.h"
 
-void	ft_list_push_front(t_list **begin_list, void *data)
+t_list *ft_list_last(t_list *begin_list)
 {
-	t_list	*node;
+	if (begin_list == NULL)
+		return (NULL);
 
-	node = ft_create_elem(data);
-	node->next = *begin_list;
-	*begin_list = node;
+	while(begin_list->next != NULL)
+	{
+		begin_list = begin_list->next;
+	}
+	return (begin_list);
 }
 
 /*
 #include <stdio.h>
 
-int	main(void)
+int main(void)
 {
-	// create linked list where: A -> B -> C -> NULL
-	t_list	*node;
+	// create linked list
+	t_list *node;
 	node = NULL;
 	ft_list_push_front(&node, "C");
 	ft_list_push_front(&node, "B");
 	ft_list_push_front(&node, "A");
 
-	// print out linked list
-	t_list *temp;
-	temp = node;
-	while (temp != NULL)
-	{
-		printf("data=%s,", (char *)temp->data);
-		printf("next=%p\n", temp->next);
-		temp = temp->next;
-	}
+	// get last node
+	t_list *last_node;
+	last_node = ft_list_last(node);
+
+	// print last node
+	printf("%s\n", (char *)last_node->data);
+	printf("%p\n", last_node->next);
+
 	return (0);
 }
 */

@@ -5,9 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jelau <jelau@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/22 13:45:08 by jelau             #+#    #+#             */
-/*   Updated: 2026/08/22 13:45:10 by jelau            ###   ########.fr       */
+/*   Created: 2026/08/22 13:32:34 by jelau             #+#    #+#             */
+/*   Updated: 2026/08/22 13:43:15 by jelau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef FT_LIST_H
+# define FT_LIST_H
 
+typedef struct s_list
+{
+	void			*data;
+	struct s_list	*next;
+}					t_list;
+
+t_list	*ft_create_elem(void *data);
+
+#endif

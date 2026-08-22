@@ -1,22 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_list.h                                          :+:      :+:    :+:   */
+/*   ft_list_size.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jelau <jelau@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/22 13:32:34 by jelau             #+#    #+#             */
-/*   Updated: 2026/08/22 13:43:15 by jelau            ###   ########.fr       */
+/*   Created: 2026/08/22 21:19:36 by jelau             #+#    #+#             */
+/*   Updated: 2026/08/22 21:19:37 by jelau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_LIST_H
-# define FT_LIST_H
+#include <stdlib.h>
+#include "ft_list.h"
 
-typedef struct s_list
+int ft_list_size(t_list *begin_list)
 {
-	void			*data;
-	struct s_list	*next;
-}					t_list;
+	int i;
 
-#endif
+	i = 0;
+	while(begin_list != NULL)
+	{
+		begin_list = begin_list->next;
+		i++;
+	}
+	return (i);
+}
+
+/*
+#include <stdio.h>
+
+int main(void)
+{
+	t_list *node;
+
+	node = NULL;
+	
+	ft_list_push_front(&node, "C");
+	ft_list_push_front(&node, "B");
+	ft_list_push_front(&node, "A");
+	printf("%d\n", ft_list_size(node));
+	return (0);
+}
+*/
