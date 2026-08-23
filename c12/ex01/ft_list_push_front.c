@@ -23,6 +23,32 @@ void	ft_list_push_front(t_list **begin_list, void *data)
 
 /*
 #include <stdio.h>
+#include <stdlib.h>
+
+t_list	*ft_create_elem(void *data)
+{
+	t_list	*node;
+
+	node = malloc(sizeof(t_list));
+	if (!node)
+		return (NULL);
+	node->data = data;
+	node->next = NULL;
+	return (node);
+}
+
+void	print_linked_list(t_list *node)
+{
+	t_list *temp;
+	temp = node;
+	while (temp != NULL)
+	{
+		printf("data=%s,", (char *)temp->data);
+		printf("&data=%p,", temp->data);
+		printf("next=%p\n", temp->next);
+		temp = temp->next;
+	}
+}
 
 int	main(void)
 {
@@ -34,14 +60,8 @@ int	main(void)
 	ft_list_push_front(&node, "A");
 
 	// print out linked list
-	t_list *temp;
-	temp = node;
-	while (temp != NULL)
-	{
-		printf("data=%s,", (char *)temp->data);
-		printf("next=%p\n", temp->next);
-		temp = temp->next;
-	}
+	print_linked_list(node);
+		
 	return (0);
 }
 */

@@ -1,33 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_list_push_back.c                                :+:      :+:    :+:   */
+/*   ft_list_push_strs.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jelau <jelau@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/22 21:46:31 by jelau             #+#    #+#             */
-/*   Updated: 2026/08/22 21:46:33 by jelau            ###   ########.fr       */
+/*   Created: 2026/08/23 01:28:53 by jelau             #+#    #+#             */
+/*   Updated: 2026/08/23 01:28:56 by jelau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "ft_list.h"
 
-void	ft_list_push_back(t_list **begin_list, void *data)
+t_list	*ft_list_push_strs(int size, char **strs)
 {
 	t_list	*node;
-	t_list	*temp;
+	t_list *temp;
+	int	i;
 
-	node = ft_create_elem(data);
-	if (*begin_list == NULL)
-	{	
-		*begin_list = node;
-		return ((void)0);
+	if (size == 0)
+		return (NULL);
+		
+	i = 0;
+	temp = NULL;
+	while (i < size)
+	{
+		node = ft_create_elem(strs[i]);
+		node->next = temp; 
+		temp = node;
+		i++;
 	}
-	temp = *begin_list;
-	while(temp->next != NULL)
-		temp = temp->next;
-	temp->next = node;
+	return (node);
 }
 
 /*
@@ -58,18 +62,18 @@ void	print_linked_list(t_list *node)
 	}
 }
 
-int main(void)
+int	main(void)
 {
-	// create linked list where: A -> B -> C -> NULL
 	t_list *node;
-	node = NULL;
-	ft_list_push_back(&node, "A");
-	ft_list_push_back(&node, "B");
-	ft_list_push_back(&node, "C");
+	char *strs[] = {"C","B","A"};
+	node = ft_list_push_strs(3, strs);
+
+	//also print out the original address
+	printf("strs[0]=%s,&strs[0]=%p\n", strs[0], strs[0]);
+	printf("strs[1]=%s,&strs[1]=%p\n", strs[1], strs[1]);
+	printf("strs[2]=%s,&strs[2]=%p\n", strs[2], strs[2]);
 
 	// print out linked list
 	print_linked_list(node);
-
-	return (0);
 }
 */

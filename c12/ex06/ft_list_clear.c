@@ -1,37 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_list_push_back.c                                :+:      :+:    :+:   */
+/*   ft_list_clear.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jelau <jelau@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/22 21:46:31 by jelau             #+#    #+#             */
-/*   Updated: 2026/08/22 21:46:33 by jelau            ###   ########.fr       */
+/*   Created: 2026/08/23 17:31:57 by jelau             #+#    #+#             */
+/*   Updated: 2026/08/23 17:31:59 by jelau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "ft_list.h"
 
-void	ft_list_push_back(t_list **begin_list, void *data)
+void ft_list_clear(t_list *begin_list, void (*free_fct)(void *))
 {
-	t_list	*node;
 	t_list	*temp;
 
-	node = ft_create_elem(data);
-	if (*begin_list == NULL)
-	{	
-		*begin_list = node;
-		return ((void)0);
+	while (begin_list != NULL)
+	{
+		temp = begin_list->next;
+		free_fct(begin_list->data);
+		free(begin_list);
+		begin_list = temp;
 	}
-	temp = *begin_list;
-	while(temp->next != NULL)
-		temp = temp->next;
-	temp->next = node;
 }
 
-/*
 #include <stdio.h>
+
+void	free_fct(void *data)
+{
+	free(data);
+}
 
 t_list	*ft_create_elem(void *data)
 {
@@ -45,10 +45,24 @@ t_list	*ft_create_elem(void *data)
 	return (node);
 }
 
+void	ft_list_push_front(t_list **begin_list, void *data)
+{
+	t_list	*node;
+
+	node = ft_create_elem(data);
+	node->next = *begin_list;
+	*begin_list = node;
+}
+
 void	print_linked_list(t_list *node)
 {
 	t_list *temp;
 	temp = node;
+	if (node == NULL)
+	{
+		printf("argument is NULL.");
+		return ((void)0);
+	}
 	while (temp != NULL)
 	{
 		printf("data=%s,", (char *)temp->data);
@@ -58,18 +72,32 @@ void	print_linked_list(t_list *node)
 	}
 }
 
-int main(void)
+int	main(void)
 {
-	// create linked list where: A -> B -> C -> NULL
+	// create linked list where: A -> B -> C -> NULL where the data is malloc'ed
 	t_list *node;
+	char	*a;
+	char	*b;
+	char	*c;
+	a = malloc(sizeof(char) * (1 + 1));
+	b = malloc(sizeof(char) * (1 + 1));
+	c = malloc(sizeof(char) * (1 + 1));
+	a[0] = 'A';
+	a[1] = '\0';
+	b[0] = 'B';
+	b[1] = '\0';
+	c[0] = 'C';
+	c[1] = '\0';	
 	node = NULL;
-	ft_list_push_back(&node, "A");
-	ft_list_push_back(&node, "B");
-	ft_list_push_back(&node, "C");
+	ft_list_push_front(&node, c);
+	ft_list_push_front(&node, b);
+	ft_list_push_front(&node, a);
 
 	// print out linked list
 	print_linked_list(node);
-
+	
+	// delete linked list
+	ft_list_clear(node, free_fct);
+	
 	return (0);
 }
-*/

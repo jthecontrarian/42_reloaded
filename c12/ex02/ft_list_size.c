@@ -29,6 +29,28 @@ int ft_list_size(t_list *begin_list)
 /*
 #include <stdio.h>
 
+t_list	*ft_create_elem(void *data)
+{
+	t_list	*node;
+
+	node = malloc(sizeof(t_list));
+	if (!node)
+		return (NULL);
+	node->data = data;
+	node->next = NULL;
+	return (node);
+}
+
+
+void	ft_list_push_front(t_list **begin_list, void *data)
+{
+	t_list	*node;
+
+	node = ft_create_elem(data);
+	node->next = *begin_list;
+	*begin_list = node;
+}
+
 int main(void)
 {
 	t_list *node;
