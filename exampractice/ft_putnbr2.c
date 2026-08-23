@@ -7,6 +7,7 @@ void ft_putchar(char c)
 
 void ft_putnbr(int nb)
 {
+	// special cases
 	if (nb == -2147483648)
 	{
 		write(1, "-2147483648", 11);
@@ -17,6 +18,8 @@ void ft_putnbr(int nb)
 		ft_putchar('-');
 		nb = -nb;
 	}
+
+	// print numbers
 	if (nb >= 0 && nb <= 9)
 		ft_putchar(nb + '0');
 	else
