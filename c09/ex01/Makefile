@@ -1,17 +1,17 @@
-# compiler, flag, and target name
+# compiler, flag, and name
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-TARGET = libft.a
+NAME = libft.a
 
 # location of .c and .o files
 SRCS = srcs/ft_putchar.c srcs/ft_strcmp.c srcs/ft_putstr.c srcs/ft_strlen.c srcs/ft_swap.c
 OBJS = $(SRCS:.c=.o)
 
-# build targets
-all: $(TARGET)
+# build NAMEs
+all: $(NAME)
 
-$(TARGET): $(OBJS)
-	ar rcs $(TARGET) $(OBJS)
+$(NAME): $(OBJS)
+	ar rcs $(NAME) $(OBJS)
 
 %.o: %.c includes/ft.h
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -20,6 +20,6 @@ clean:
 	rm -f $(OBJS)
 
 fclean: clean
-	rm -f $(TARGET)
+	rm -f $(NAME)
 
 re: fclean all
